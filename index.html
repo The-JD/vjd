@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="JCD Creations">
+    <meta name="author" content="JCD Creations">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <title>Certificate Verification - JCD Creations</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+
+    <!-- Site Icons -->
+    <link rel="shortcut icon" href="assets/img/favicon.ico" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
+
+    <!-- Bootstrap core CSS -->
+    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- <script src='assets/scripts/config.js'></script> -->
+    <!-- <script data-main="scripts/main" src="assets/scripts/require.js"></script> -->
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-CKMEWV5PZG"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3539870306657649"
+        crossorigin="anonymous"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-CKMEWV5PZG');
+    </script>
+
+    <script>
+        document.addEventListener('contextmenu', event => event.preventDefault());
+    </script>
+
+</head>
+
+<body>
+    <header>
+    </header>
+    <nav class="navbar navbar-expand-lg bg-light">
+        <div class="container-fluid">
+            <a href="#" class="navbar-brand">
+                <img style="height: 70px;" src="assets/img/logo.png" alt="">
+            </a>
+        </div>
+    </nav>
+
+    <div class="container aligncenter pad20">
+        <div class="row">
+            <div class="col-lg-6 offset-lg-3">
+                <h4 class="alignCenter">Certificate Verification</h4>
+                <div class="card pad20">
+                    <form>
+                        <div class="form-group">
+                            <label for="certificateId">Enter the certificate ID</label>
+                            <input type="number" class="form-control" id="certificateId" placeholder="Enter ID">
+                        </div>
+                    </form>
+                    <div>
+                        <button type="button" class="btn btn-info" onclick="verifyCert()">Verify</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function verifyCert() {
+            document.getElementById('certImgBlock').style.display = "none";
+            document.getElementById('noCertification').style.display = "none";
+            const certificateID = document.getElementById("certificateId").value;
+
+            if (certificateID === '924808') {
+                const imageVal = "assets/img/" + certificateID + ".jpg";
+                document.getElementById('certImgBlock').style.display = "block";
+                document.getElementById("certImg").src = imageVal;
+                document.getElementById('noCertification').style.display = "none";
+            } else {
+                document.getElementById('noCertification').style.display = "block";
+                document.getElementById('certImgBlock').style.display = "none";
+            }
+        }
+
+        function printMe() {
+            const iframe = document.createElement('iframe');
+
+            // Make it hidden
+            iframe.style.height = 0;
+            iframe.style.visibility = 'hidden';
+            iframe.style.width = 0;
+
+            // Set the iframe's source
+            iframe.setAttribute('srcdoc', '<html><body></body></html>');
+
+            document.body.appendChild(iframe);
+
+            iframe.addEventListener('load', function () {
+                // Clone the image
+                const image = document.getElementById('certImg').cloneNode();
+                image.style.maxWidth = '100%';
+
+                // Append the image to the iframe's body
+                const body = iframe.contentDocument.body;
+                body.style.textAlign = 'center';
+                body.appendChild(image);
+                image.addEventListener('load', function () {
+                    // Invoke the print when the image is ready
+                    iframe.contentWindow.print();
+                });
+            });
+            iframe.contentWindow.addEventListener('afterprint', function () {
+                iframe.parentNode.removeChild(iframe);
+            });
+
+        }
+    </script>
+
+    <div class="container-fluid pad20 alignCenter" id="certBlock">
+        <div id="certImgBlock" class="pad10 alignCenter" style="display: none;">
+
+            <img class="pad10" style="width: 100%;" id="certImg">
+
+            <div>
+                <button type="button" class="btn btn-info" onclick="printMe()">Print Certificate</button>
+            </div>
+        </div>
+
+        <div id="noCertification" class="pad20 alignCenter" style="display: none">
+            <h4 style="color: red;">No Certifications Found. Please verify the certificate id.</h4>
+        </div>
+    </div>
+
+    <footer class="bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 small">
+                    <p>🏢 Certificate Issued by <a href="https://www.jcdcreations.com/" target="_blank"> JCD Creations
+                        </a> </p>
+                    <p>Copyright © 2022 JCD Creations. All Rights Reserved. </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>
